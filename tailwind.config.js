@@ -3,9 +3,13 @@ const isDev = process.env.NODE_ENV !== 'production';
 module.exports = {
     purge: [],
     theme: {
-        extend: {},
-        screens: {
-            dark: { raw: '(prefers-color-scheme: dark)' },
+        extend: {
+            screens: {
+                dark: { raw: '(prefers-color-scheme: dark)' },
+            },
+        },
+        debugScreens: {
+            ignore: ['dark'],
         },
     },
     variants: {
