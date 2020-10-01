@@ -1,3 +1,5 @@
+const isDev = process.env.NODE_ENV !== 'production';
+
 const purgecss = {
     '@fullhuman/postcss-purgecss': {
         content: [
@@ -13,6 +15,6 @@ module.exports = {
     plugins: {
         tailwindcss: {},
         autoprefixer: {},
-        ...(process.env.NODE_ENV === 'production' ? purgecss : {}),
+        ...(!isDev ? purgecss : {}),
     },
 };

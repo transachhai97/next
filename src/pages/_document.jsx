@@ -1,5 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
+import isDev from '@/app/env';
+
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
         const initialProps = await Document.getInitialProps(ctx);
@@ -10,7 +12,7 @@ class MyDocument extends Document {
         return (
             <Html lang="vn">
                 <Head />
-                <body>
+                <body className={isDev ? 'debug-screens' : ''}>
                     <Main />
                     <NextScript />
                 </body>
