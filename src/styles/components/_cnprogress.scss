@@ -1,0 +1,16 @@
+/* stylelint-disable */
+@import '~nprogress/nprogress.css';
+@import "../variables";
+
+#nprogress .bar {
+    background: $nprogress_color !important;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px $nprogress_color, 0 0 5px $nprogress_color !important;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: $nprogress_color !important;
+    border-left-color: $nprogress_color !important;
+}
