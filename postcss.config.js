@@ -1,4 +1,4 @@
-const isDev = process.env.NODE_ENV !== 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const purgecss = {
     '@fullhuman/postcss-purgecss': {
@@ -11,10 +11,24 @@ const purgecss = {
     },
 };
 
+const cssnano = {
+    cssnano: {
+        preset: [
+            'default',
+            {
+                discardComments: {
+                    removeAll: true,
+                },
+            },
+        ],
+    },
+};
+
 module.exports = {
     plugins: {
         tailwindcss: {},
         autoprefixer: {},
-        ...(!isDev ? purgecss : {}),
+        ...(isProduction ? purgecss : {}),
+        ...(isProduction ? cssnano : {}),
     },
 };
