@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from '@/styles/Home.scss';
 
-export default function Home() {
+function Home() {
     const { t } = useTranslation();
 
     return (
@@ -91,3 +91,7 @@ export default function Home() {
         </div>
     );
 }
+
+Home.whyDidYouRender = true;
+
+export default Home;
