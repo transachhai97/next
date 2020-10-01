@@ -2,9 +2,10 @@ const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const withPlugins = require('next-compose-plugins');
 const sass = require('@zeit/next-sass');
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 const genericNames = require('generic-names');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const localIdentName = isProduction
@@ -33,6 +34,17 @@ const nextConfig = {
             'private-next-pages': path.resolve(__dirname, 'src/pages'),
             '@': path.resolve(__dirname, 'src'),
         };
+
+        if (dev) {
+            newConfig.plugins.push(
+                new StyleLintPlugin({
+                    files: [
+                        'src/**/*.{js,jsx,htm,html,css,sss,less,scss,sass}',
+                    ],
+                    emitWarning: true,
+                })
+            );
+        }
 
         // Important: return the modified config
         return newConfig;
