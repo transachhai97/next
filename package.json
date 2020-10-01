@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "outdated": "yarn outdated",
+    "docsify": "docsify serve docs --port 1234",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -12,5 +13,8 @@
     "next": "9.5.3",
     "react": "16.13.1",
     "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "docsify-cli": "^4.4.1"
   }
 }
