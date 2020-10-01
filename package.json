@@ -5,8 +5,9 @@
   "scripts": {
     "outdated": "yarn outdated",
     "docsify": "docsify serve docs --port 1234",
+    "stylelint": "stylelint \"src/**/*.{js,jsx,htm,html,css,sss,less,scss,sass}\" --fix",
     "eslint": "eslint \"src/**/*.{js,jsx}\" --fix",
-    "clean": "yarn eslint",
+    "clean": "yarn stylelint && yarn eslint",
     "dev": "yarn clean && next dev",
     "build": "yarn clean && next build",
     "start": "next start",
@@ -30,6 +31,12 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.2",
     "next-on-netlify": "^2.4.0",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "stylelint": "^13.7.2",
+    "stylelint-config-airbnb": "^0.0.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0",
+    "stylelint-webpack-plugin": "^2.1.0"
   }
 }
