@@ -10,6 +10,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const withOffline = require('next-offline');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const localIdentName = isProduction
@@ -76,6 +77,7 @@ const nextConfig = {
 module.exports = withPlugins(
     [
         // add plugins here..
+        [withOffline, {}],
         [
             sass,
             {
