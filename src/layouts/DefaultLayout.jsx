@@ -30,12 +30,9 @@ export default function DefaultLayout({ children }) {
         return <Offline />;
     }
 
-    if (spinner) {
-        return <LoadingScreen />;
-    }
-
     return (
         <>
+            {spinner && <LoadingScreen />}
             <ScrollProgress />
             <Toastify />
             <ChangeLanguage />
