@@ -7,6 +7,8 @@ import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
 import Toastify from '@/components/Toastify/Toastify';
 import ChangeLanguage from '@/components/ChangeLanguage/ChangeLanguage';
 import DarkModeToggle from '@/components/DarkModeToggle/DarkModeToggle';
+import useOnlineStatus from '@/hooks/useOnlineStatus';
+import Offline from '@/components/Offline/Offline';
 
 // eslint-disable-next-line no-unused-vars
 Router.events.on('routeChangeStart', (url) => {
@@ -16,14 +18,23 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 export default function DefaultLayout({ children }) {
+    const onlineStatus = useOnlineStatus();
+
     const [spinner, setSpinner] = useState(true);
 
     useEffect(() => {
         setTimeout(() => setSpinner(false), 500);
     }, []);
-    return spinner ? (
-        <LoadingScreen />
-    ) : (
+
+    if (!onlineStatus.online) {
+        return <Offline />;
+    }
+
+    if (spinner) {
+        return <LoadingScreen />;
+    }
+
+    return (
         <>
             <ScrollProgress />
             <Toastify />
