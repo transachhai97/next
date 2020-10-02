@@ -6,6 +6,8 @@ const sass = require('@zeit/next-sass');
 const genericNames = require('generic-names');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const localIdentName = isProduction
@@ -42,6 +44,19 @@ const nextConfig = {
                         'src/**/*.{js,jsx,htm,html,css,sss,less,scss,sass}',
                     ],
                     emitWarning: true,
+                })
+            );
+        }
+
+        if (isProduction) {
+            newConfig.plugins.push(
+                new CopyWebpackPlugin({
+                    patterns: [
+                        {
+                            from: path.join(__dirname, 'docs'),
+                            to: path.join(__dirname, 'public/docs'),
+                        },
+                    ],
                 })
             );
         }
