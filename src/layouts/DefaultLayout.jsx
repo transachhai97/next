@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NProgress from 'nprogress';
 import Router from 'next/router';
+import { PageTransition } from 'next-page-transitions';
 
 import ScrollProgress from '@/components/ScrollProgress/ScrollProgress';
 import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
@@ -37,7 +38,10 @@ export default function DefaultLayout({ children }) {
             <Toastify />
             <ChangeLanguage />
             <DarkModeToggle />
-            {children}
+
+            <PageTransition timeout={300} classNames="page-transition">
+                {children}
+            </PageTransition>
         </>
     );
 }
