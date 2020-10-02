@@ -8,6 +8,8 @@ const genericNames = require('generic-names');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const localIdentName = isProduction
@@ -56,6 +58,11 @@ const nextConfig = {
                             from: path.join(__dirname, 'docs'),
                             to: path.join(__dirname, 'public/docs'),
                         },
+                    ],
+                }),
+                new CleanWebpackPlugin({
+                    cleanOnceBeforeBuildPatterns: [
+                        path.join(process.cwd(), 'public/docs/**/*'),
                     ],
                 })
             );
