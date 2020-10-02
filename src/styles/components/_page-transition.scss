@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 @import '../variables';
 
 .page-transition-enter {
@@ -21,3 +22,5 @@
 
     transition: opacity $timeout_transition;
 }
+
+/* purgecss end ignore */
