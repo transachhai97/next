@@ -12,7 +12,12 @@ class MyDocument extends Document {
         return (
             <Html lang="vn">
                 <Head>
-                    <link rel="manifest" href="/_next/static/manifest.json" />
+                    {!isDev && (
+                        <link
+                            rel="manifest"
+                            href="/_next/static/manifest.json"
+                        />
+                    )}
                 </Head>
                 <body className={isDev ? 'debug-screens' : ''}>
                     <Main />
