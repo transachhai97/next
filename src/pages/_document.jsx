@@ -11,7 +11,9 @@ class MyDocument extends Document {
     render() {
         return (
             <Html lang="vn">
-                <Head />
+                <Head>
+                    <link rel="manifest" href="/_next/static/manifest.json" />
+                </Head>
                 <body className={isDev ? 'debug-screens' : ''}>
                     <Main />
                     <NextScript />

@@ -23,6 +23,8 @@
 /build
 
 # public
+/public/service-worker.js
+/public/workbox-*.js
 /public/docs/
 
 # misc

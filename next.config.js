@@ -11,6 +11,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const withOffline = require('next-offline');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const withPWA = require('next-pwa');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const localIdentName = isProduction
@@ -65,6 +67,33 @@ const nextConfig = {
                     cleanOnceBeforeBuildPatterns: [
                         path.join(process.cwd(), 'public/docs/**/*'),
                     ],
+                }),
+                new WebpackPwaManifest({
+                    filename: 'static/manifest.json',
+                    name: 'Next PWA',
+                    short_name: 'Next-PWA',
+                    description:
+                        'A Movie browsing PWA using Next.js and Google Workbox',
+                    background_color: '#ffffff',
+                    theme_color: '#5755d9',
+                    display: 'standalone',
+                    orientation: 'portrait',
+                    fingerprints: false,
+                    inject: false,
+                    start_url: '/',
+                    ios: {
+                        'apple-mobile-web-app-title': 'Next-PWA',
+                        'apple-mobile-web-app-status-bar-style': '#5755d9',
+                    },
+                    icons: [
+                        {
+                            src: path.resolve('public/icon.png'),
+                            sizes: [96, 128, 192, 256, 384, 512],
+                            destination: '/static',
+                        },
+                    ],
+                    includeDirectory: true,
+                    publicPath: '/_next/',
                 })
             );
         }
@@ -78,6 +107,17 @@ module.exports = withPlugins(
     [
         // add plugins here..
         [withOffline, {}],
+        [
+            withPWA,
+            {
+                pwa: {
+                    disable: !isProduction,
+                    dest: 'public',
+                    sw: 'service-worker.js',
+                    buildExcludes: [/.*docs.*$/, /.*icon_.*$/],
+                },
+            },
+        ],
         [
             sass,
             {
