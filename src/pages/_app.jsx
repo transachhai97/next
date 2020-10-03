@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import whyDidYouRender from '@welldone-software/why-did-you-render';
 
@@ -20,5 +21,19 @@ function MyApp({ Component, pageProps }) {
         </Layout>
     );
 }
+
+MyApp.propTypes = {
+    Component: PropTypes.shape({
+        Layout: PropTypes.node,
+    }),
+    pageProps: PropTypes.shape,
+};
+
+MyApp.defaultProps = {
+    Component: {
+        Layout: DefaultLayout,
+    },
+    pageProps: null,
+};
 
 export default MyApp;

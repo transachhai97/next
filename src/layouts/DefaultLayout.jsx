@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import { PageTransition } from 'next-page-transitions';
@@ -21,7 +22,7 @@ Router.events.on('routeChangeStart', (url) => {
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-export default function DefaultLayout({ children }) {
+function DefaultLayout({ children }) {
     const onlineStatus = useOnlineStatus();
 
     const [spinner, setSpinner] = useState(true);
@@ -49,3 +50,9 @@ export default function DefaultLayout({ children }) {
         </>
     );
 }
+
+DefaultLayout.propTypes = {
+    children: PropTypes.element.isRequired,
+};
+
+export default DefaultLayout;

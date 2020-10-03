@@ -4,9 +4,8 @@ function ScrollProgress() {
     useEffect(() => {
         const progressBarHandler = () => {
             const totalScroll = document.documentElement.scrollTop;
-            const windowHeight =
-                document.documentElement.scrollHeight -
-                document.documentElement.clientHeight;
+            const windowHeight = document.documentElement.scrollHeight
+                - document.documentElement.clientHeight;
             const scroll = `${totalScroll / windowHeight}`;
             const progressBar = document.querySelector('.progressBar');
 
