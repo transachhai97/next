@@ -26,7 +26,7 @@ MyApp.propTypes = {
     Component: PropTypes.shape({
         Layout: PropTypes.node,
     }),
-    pageProps: PropTypes.shape,
+    pageProps: PropTypes.instanceOf(PropTypes),
 };
 
 MyApp.defaultProps = {
