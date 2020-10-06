@@ -1,5 +1,7 @@
 const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
+const nextBuildId = require('next-build-id');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const withPlugins = require('next-compose-plugins');
 const sass = require('@zeit/next-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -23,15 +25,17 @@ const generate = genericNames(localIdentName, {
     context: process.cwd(),
 });
 
-// eslint-disable-next-line no-shadow
-const getLocalIdent = (loaderContext, localIdentName, localName) =>
-    generate(localName, loaderContext.resourcePath);
+// eslint-disable-next-line no-shadow,max-len
+const getLocalIdent = (loaderContext, localIdentName, localName) => generate(localName, loaderContext.resourcePath);
 
 const nextConfig = {
     // Target must be serverless
     target: 'serverless',
-    // eslint-disable-next-line no-unused-vars
-    webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    generateBuildId: () => nextBuildId({ dir: __dirname }),
+    webpack: (config, {
+        // eslint-disable-next-line no-unused-vars
+        buildId, dev, isServer, defaultLoaders, webpack,
+    }) => {
         // Note: we provide webpack above so you should not `require` it
         const newConfig = config;
 
@@ -49,7 +53,7 @@ const nextConfig = {
                         'src/**/*.{js,jsx,htm,html,css,sss,less,scss,sass}',
                     ],
                     emitWarning: true,
-                })
+                }),
             );
         }
 
@@ -94,7 +98,7 @@ const nextConfig = {
                     ],
                     includeDirectory: true,
                     publicPath: '/_next/',
-                })
+                }),
             );
         }
 
@@ -130,26 +134,26 @@ module.exports = withPlugins(
                         localIdentName,
                         localName,
                         // eslint-disable-next-line no-unused-vars
-                        options
+                        options,
                     ) => {
                         const pathLocalName = loaderContext.resourcePath;
                         if (
-                            pathLocalName.includes('src/styles/index.scss') ||
-                            pathLocalName.includes('src\\styles\\index.scss') ||
-                            pathLocalName.includes('node_modules') ||
-                            localName === 'mode-dark'
+                            pathLocalName.includes('src/styles/index.scss')
+                            || pathLocalName.includes('src\\styles\\index.scss')
+                            || pathLocalName.includes('node_modules')
+                            || localName === 'mode-dark'
                         ) {
                             return localName;
                         }
                         return getLocalIdent(
                             loaderContext,
                             localIdentName,
-                            localName
+                            localName,
                         );
                     },
                 },
             },
         ],
     ],
-    nextConfig
+    nextConfig,
 );
