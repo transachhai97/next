@@ -3,7 +3,7 @@ import Document, {
     Html, Head, Main, NextScript,
 } from 'next/document';
 
-import isDev from '@/app/env';
+import isDev from 'app/env';
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {

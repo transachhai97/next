@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
-import styles from '@/styles/Home.scss';
+import styles from 'styles/Home.scss';
 
 function Home() {
     const { t } = useTranslation();

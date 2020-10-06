@@ -39,13 +39,6 @@ const nextConfig = {
         // Note: we provide webpack above so you should not `require` it
         const newConfig = config;
 
-        const aliases = config.resolve.alias || {};
-        newConfig.resolve.alias = {
-            ...aliases,
-            'private-next-pages': path.resolve(__dirname, 'src/pages'),
-            '@': path.resolve(__dirname, 'src'),
-        };
-
         if (dev) {
             newConfig.plugins.push(
                 new StyleLintPlugin({
